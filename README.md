@@ -1,19 +1,24 @@
-# Prognoza pogody
- Aplikacja do sprawdzania prognozy pogody – aktualnej oraz na kolejne pięć dni.
+# weather-forecast
 
-Parametry pogody będą przedstawiane w dwóch wersjach:
+## Project setup
+```
+yarn install
+```
 
-- Podstawowej:
-  - Stan pogody ( w formie ikony np. deszcz, słonecznie)
-  - Temperatura
-  - Wiatr (prędkość, kierunek w formie ikony)
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
 
-- Szczegółowej:
-  - Parametry zawarte w wariancie podstawowym oraz:
-  - Temperatura odczuwalna
-  - Ciśnienie
-  - Wilgotność powietrza
-  - Zachmurzenie (%)
-  - Poziom opadów
+### Compiles and minifies for production
+```
+yarn build
+```
 
-Dane będą prezentowane graficznie w postaci różnorodnych ikon, symboli oraz wykresów.
+### Lints and fixes files
+```
+yarn lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
