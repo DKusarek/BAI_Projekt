@@ -1,6 +1,7 @@
 <template>
-  <div id="app">
-    <p>Hello word"</p>
+  <div id="app">  
+    <font-awesome-icon icon="sun" />
+
   </div>
 </template>
 
@@ -13,4 +14,5 @@ export default {
 </script>
 
 <style>
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
 </style>
