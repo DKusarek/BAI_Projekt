@@ -17,3 +17,9 @@ Parametry pogody będą przedstawiane w dwóch wersjach:
   - Poziom opadów
 
 Dane będą prezentowane graficznie w postaci różnorodnych ikon, symboli oraz wykresów.
+
+## before run
+npm i 
+
+## run app 
+npm run serve
