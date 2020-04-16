@@ -1,27 +1,37 @@
 <template>
   <div id="app">  
     <Header/>
-    <LeftComponent/>
-    <RightComponent
-       :temperature="temperature"
-       :weatherInfo="weatherInfo"
-    />
+    <NavBar/>
+    <div class="container" style="margin-top:20px">
+      <div class="row">
+        <CurrentWeather
+          :temperature="temperature"
+          :weatherInfo="weatherInfo"
+        />
+        <ExtendedWeather/>
+        <ForecastWeather/>
+      </div>
+    </div>
     <Footer/>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
-import LeftComponent from './components/LeftComponent.vue'
-import RightComponent from './components/RightComponent.vue'
+import NavBar from './components/NavBar.vue'
+import CurrentWeather from './components/CurrentWeather.vue'
+import ExtendedWeather from './components/ExtendedWeather.vue'
+import ForecastWeather from './components/ForecastWeather.vue'
 import Footer from './components/Footer.vue'
 
 export default {
   name: 'app',
   components: {
      Header,
-     LeftComponent,
-     RightComponent,
+     NavBar,
+     CurrentWeather,
+     ExtendedWeather,
+     ForecastWeather,
      Footer
   },
   data() {
