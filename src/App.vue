@@ -41,7 +41,7 @@ export default {
   },
   mounted: function() {
     fetch(
-      "http://api.openweathermap.org/data/2.5/weather?q=London&appid=d5a589d05f905ed2539636a36298d888",
+      `${process.env.VUE_APP_URL}/weather?q=London&appid=${process.env.VUE_APP_API_KEY}`,
       {
         method: "get"
       }
@@ -50,7 +50,7 @@ export default {
         return response.json();
       })
       .then(jsonObj => {
-        //var jsonObj = JSON.parse(jsonData);
+        console.log(process.env.VUE_APP_URL);
         this.weatherInfo = jsonObj.weather[0].description;
         this.temperature =
           Math.round(
