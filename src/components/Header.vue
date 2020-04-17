@@ -9,6 +9,7 @@
 #header{
     margin-bottom:0;
     background-image: url('../assets/storm.jpg');
+    background-size:cover;
     color: white;
 }
 </style>

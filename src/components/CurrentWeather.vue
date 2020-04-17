@@ -1,5 +1,5 @@
 <template>
-    <div class="col-sm-4">
+    <div class="col-sm-6">
       <h2>Current Weather</h2>
       <h5 id="weather"></h5>
       <h5>WeatherVue: {{weatherInfo}}</h5>
