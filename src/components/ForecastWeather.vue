@@ -7,3 +7,13 @@
     </div>
     <!-- end of todo -->
 </template>
+
+<script>
+export default {
+   name: "forecast-weather"
+}
+</script>
+
+<style scoped>
+
+</style>
