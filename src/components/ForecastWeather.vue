@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-sm-12">
           <p>Date: {{ weather.date }}</p>
-          <div class="weather-icon">
+          <div class="weather-icon" v-if="weather.icon">
             <font-awesome-icon :icon="weather.icon" size="4x" />
           </div>
           <p>Temperature: {{ weather.temperature }}</p>
