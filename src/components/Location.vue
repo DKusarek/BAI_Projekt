@@ -5,6 +5,7 @@
             <input type="text" v-model="city" placeholder="Custom">
             <button type="submit">Save</button>
         </form>
+        <button @click="currentLocation">Current location</button>
         <div v-if="errorStr">
             Sorry, but the following error
             occurred: {{errorStr}}
@@ -21,7 +22,7 @@ export default {
     name: 'Location',
     data() {
         return {
-            city: '',
+            city: JSON.parse(window.localStorage.getItem('city')),
             location:null,
             gettingLocation: false,
             errorStr:null
@@ -49,6 +50,10 @@ export default {
         saveGeolocation() {
             localStorage.setItem('latitude',JSON.stringify(Math.round(this.location.coords.latitude)));
             localStorage.setItem('longitude',JSON.stringify(Math.round(this.location.coords.longitude)));
+        },
+        currentLocation() {
+            localStorage.removeItem('city');
+            this.city = '';
         }
     }
 }
