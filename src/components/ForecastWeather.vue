@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-12" style="border:1px solid black;">
+  <div class="col-sm-12" style="border:1px solid black;" v-if="!loading">
     <h2>Forecast Wether</h2>
     <div class="day-forecast" v-for="weather in forecast" :key="weather.id">
       <div class="row">
@@ -43,14 +43,30 @@ export default {
             direction: ""
           }
         }
-      ]
+      ],
+      errored: null,
+      loading: true,
+      city: "",
+      latitude: 0,
+      longitude: 0,
+      url: null
     };
+  },
+  created() {
+    this.city = JSON.parse(window.localStorage.getItem("city"));
+    this.latitude = JSON.parse(window.localStorage.getItem("latitude"));
+    this.longitude = JSON.parse(window.localStorage.getItem("longitude"));
+    if (this.city) {
+      this.url = `${process.env.VUE_APP_URL}/forecast?q=${this.city}&appid=${process.env.VUE_APP_API_KEY}`;
+    } else if (this.latitude && this.longitude) {
+      this.url = `${process.env.VUE_APP_URL}/forecast?lat=${this.latitude}&lon=${this.longitude}&appid=${process.env.VUE_APP_API_KEY}`;
+    } else {
+      this.url = `${process.env.VUE_APP_URL}/forecast?q=London&appid=${process.env.VUE_APP_API_KEY}`;
+    }
   },
   mounted: function() {
     axios
-      .get(
-        `${process.env.VUE_APP_URL}/forecast?q=London,us&appid=${process.env.VUE_APP_API_KEY}`
-      )
+      .get(this.url)
       .then(response => {
         let forecast = [];
         response.data.list.forEach((x, index) => {
@@ -73,7 +89,12 @@ export default {
         });
 
         this.forecast = forecast;
-      });
+      })
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      })
+      .finally(() => (this.loading = false));
   }
 };
 </script>
