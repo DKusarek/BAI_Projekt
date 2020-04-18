@@ -24,24 +24,40 @@ export default {
             pressure: 0,
             rain: 0,
             errored: null,
-            loading: null
+            loading: null,
+            city: '',
+            latitude: 0,
+            longitude: 0,
+            url: null
         }
+    },
+    created () {
+      this.city = JSON.parse(window.localStorage.getItem('city'));
+      this.latitude = JSON.parse(window.localStorage.getItem('latitude'));
+      this.longitude = JSON.parse(window.localStorage.getItem('longitude'));
+      if(this.city) {
+        this.url = `${process.env.VUE_APP_URL}/weather?q=${this.city}&appid=${process.env.VUE_APP_API_KEY}`;
+      } else if (this.latitude && this.longitude) {
+        this.url = `${process.env.VUE_APP_URL}/weather?lat=${this.latitude}&lon=${this.longitude}&appid=${process.env.VUE_APP_API_KEY}`;
+      } else {
+        this.url = `${process.env.VUE_APP_URL}/weather?q=London&appid=${process.env.VUE_APP_API_KEY}`;
+      }
     },
     mounted () {
         axios
-        .get(`${process.env.VUE_APP_URL}/weather?q=London&appid=${process.env.VUE_APP_API_KEY}`)
-        .then(response => {
+          .get(this.url)
+          .then(response => {
             this.feelsLike = response['data']['main']['feels_like'],
             this.clouds = response['data']['clouds']['all'],
             this.pressure = response['data']['main']['pressure'],
             this.humidity = response['data']['main']['humidity'],
             this.humidity = response['data']['rain']['3h']
           })
-        .catch(error => {
+          .catch(error => {
             console.log(error)
             this.errored = true
-        })
-        .finally(() => this.loading = false)
+          })
+          .finally(() => this.loading = false);
     },
     computed: {
       convertFeelsLikeToCelsius: function () {

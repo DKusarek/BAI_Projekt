@@ -12,9 +12,6 @@
         <div v-if="gettingLocation">
             <i>Getting your location...</i>
         </div>
-        <div v-if="location">
-            Your location data is {{ location.coords.latitude }}, {{ location.coords.longitude}}
-        </div>
     </div>
     <!-- end of todo -->
 </template>
@@ -50,8 +47,8 @@ export default {
             localStorage.setItem('city',JSON.stringify(this.city));
         }, 
         saveGeolocation() {
-            localStorage.setItem('latitude',JSON.stringify(this.location.coords.latitude));
-            localStorage.setItem('longitude',JSON.stringify(this.location.coords.longitude));
+            localStorage.setItem('latitude',JSON.stringify(Math.round(this.location.coords.latitude)));
+            localStorage.setItem('longitude',JSON.stringify(Math.round(this.location.coords.longitude)));
         }
     }
 }
