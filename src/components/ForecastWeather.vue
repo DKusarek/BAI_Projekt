@@ -79,7 +79,4 @@ export default {
   vertical-align: top;
 }
 
-font-awesome-icon {
-  color: #6287ad;
-}
 </style>
