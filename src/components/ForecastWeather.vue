@@ -9,7 +9,13 @@
             <font-awesome-icon :icon="weather.icon" size="4x" />
           </div>
           <p>Temperature: {{ weather.temperature }}</p>
-          <p>Wind: {{ weather.wind.speed }} m/s</p>
+          <div>
+            <p>
+              <font-awesome-icon class="wind-icon" icon="wind" size="lg" />
+              <span>{{weather.wind.direction}}</span>
+            </p>
+            <p class="wind-speed">{{ weather.wind.speed }} m/s</p>
+          </div>
         </div>
       </div>
     </div>
@@ -19,10 +25,11 @@
 <script>
 import axios from "axios";
 import { icons } from "./helpers/IconHelper";
+import { conversion } from "./helpers/ConversionHelper";
 
 export default {
   name: "forecast-weather",
-  mixins: [icons],
+  mixins: [icons, conversion],
   data() {
     return {
       forecast: [
@@ -50,7 +57,7 @@ export default {
           if (x.dt_txt.indexOf("12:00:00") !== -1) {
             let weather = {
               id: index,
-              date: x.dt_txt.substring(0, x.dt_txt.indexOf("12:00:00")),
+              date: x.dt_txt.substring(0, x.dt_txt.indexOf("12:00:00")-1),
               icon: this.getWeatherIcon(
                 x.weather[0].main,
                 x.weather[0].description
@@ -58,7 +65,7 @@ export default {
               temperature: x.main.temp,
               wind: {
                 speed: x.wind.speed,
-                direction: x.wind.deg
+                direction: this.getWindDirection(x.wind.deg)
               }
             };
             forecast.push(weather);
@@ -77,5 +84,10 @@ export default {
   width: 20%;
   border: 1px solid black;
   vertical-align: top;
+}
+
+.wind-icon,
+.wind-speed{
+  margin: 0 10px;
 }
 </style>
