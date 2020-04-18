@@ -4,6 +4,9 @@
     <NavBar />
     <div class="container" style="margin-top:20px">
       <div class="row">
+        <Location />
+      </div>
+      <div class="row">
         <CurrentWeather :temperature="temperature" :weatherInfo="weatherInfo" />
         <ExtendedWeather />
       </div>
@@ -22,6 +25,7 @@ import CurrentWeather from "./components/CurrentWeather.vue";
 import ExtendedWeather from "./components/ExtendedWeather.vue";
 import ForecastWeather from "./components/ForecastWeather.vue";
 import Footer from "./components/Footer.vue";
+import Location from "./components/Location.vue";
 
 export default {
   name: "app",
@@ -31,7 +35,8 @@ export default {
     CurrentWeather,
     ExtendedWeather,
     ForecastWeather,
-    Footer
+    Footer,
+    Location
   },
   data() {
     return {
