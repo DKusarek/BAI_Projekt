@@ -5,7 +5,9 @@
       <div class="row">
         <div class="col-sm-12">
           <p>Date: {{ weather.date }}</p>
-          <p>Description: {{weather.description}}</p>
+          <div class="weather-icon">
+            <font-awesome-icon :icon="weather.icon" size="4x" />
+          </div>
           <p>Temperature: {{ weather.temperature }}</p>
           <p>Wind: {{ weather.wind.speed }} m/s</p>
         </div>
@@ -16,16 +18,18 @@
 
 <script>
 import axios from "axios";
+import { icons } from "./helpers/IconHelper";
 
 export default {
   name: "forecast-weather",
+  mixins: [icons],
   data() {
     return {
       forecast: [
         {
           id: 0,
           date: null,
-          description: "",
+          icon: "",
           temperature: 0,
           wind: {
             speed: "",
@@ -47,7 +51,10 @@ export default {
             let weather = {
               id: index,
               date: x.dt_txt.substring(0, x.dt_txt.indexOf("12:00:00")),
-              description: x.weather[0].main,
+              icon: this.getWeatherIcon(
+                x.weather[0].main,
+                x.weather[0].description
+              ),
               temperature: x.main.temp,
               wind: {
                 speed: x.wind.speed,
@@ -71,4 +78,5 @@ export default {
   border: 1px solid black;
   vertical-align: top;
 }
+
 </style>

@@ -73,7 +73,12 @@ html {
   min-height: 100%;
 }
 body {
-  margin-bottom: 60px; /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.weather-icon{
+  color: #5b8fc7;
+  text-align: center;
 }
 
 </style>
