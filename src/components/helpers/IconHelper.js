@@ -8,19 +8,19 @@ const icons = {
                     switch (description) {
                         case "light rain":
                         case "moderate rain":
-                            return "cloudRain";
+                            return "cloud-rain";
                         case "freezing rain":
                             return "snowflake";
                         default:
-                            return "cloudShowersHeavy"
+                            return "cloud-showers-heavy"
                     }
                 case "Thunderstorm":
                     return "bolt";
                 case "Clouds":
                     switch (description) {
-                        case "few clouds: 11-25%":
-                        case "scattered clouds: 25-50%":
-                            return "cloudSun";
+                        case "few clouds":
+                        case "scattered clouds":
+                            return "cloud-sun";
                         default:
                             return "cloud";
                     }

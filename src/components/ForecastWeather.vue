@@ -78,5 +78,4 @@ export default {
   border: 1px solid black;
   vertical-align: top;
 }
-
 </style>
