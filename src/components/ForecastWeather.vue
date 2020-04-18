@@ -8,7 +8,7 @@
           <div class="weather-icon" v-if="weather.icon">
             <font-awesome-icon :icon="weather.icon" size="4x" />
           </div>
-          <p>Temperature: {{ weather.temperature }}</p>
+          <p>Temperature: {{ weather.temperature }} °C</p>
           <div>
             <p>
               <font-awesome-icon class="wind-icon" icon="wind" size="lg" />
@@ -78,7 +78,7 @@ export default {
                 x.weather[0].main,
                 x.weather[0].description
               ),
-              temperature: x.main.temp,
+              temperature: this.convertToCelsius(x.main.temp),
               wind: {
                 speed: x.wind.speed,
                 direction: this.getWindDirection(x.wind.deg)
