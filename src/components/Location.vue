@@ -54,6 +54,7 @@ export default {
         currentLocation() {
             localStorage.removeItem('city');
             this.city = '';
+            location.reload();
         }
     }
 }
