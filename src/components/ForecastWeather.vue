@@ -11,7 +11,7 @@
           <div class="row weather-parameters">
             <div class="temperature-container">
               <font-awesome-icon icon="temperature-high" size="lg" />
-              <p>{{ weather.temperature }}</p>
+              <p>{{ weather.temperature }} °C</p>
             </div>
             <div class="wind-container">
               <p class="wind-icon-paragraph">
@@ -83,7 +83,7 @@ export default {
                 x.weather[0].main,
                 x.weather[0].description
               ),
-              temperature: x.main.temp,
+              temperature: this.convertToCelsius(x.main.temp),
               wind: {
                 speed: x.wind.speed,
                 direction: this.getWindDirection(x.wind.deg)
