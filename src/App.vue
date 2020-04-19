@@ -7,7 +7,7 @@
         <Location />
       </div>
       <div class="row">
-        <CurrentWeather :temperature="temperature" :weatherInfo="weatherInfo" />
+        <CurrentWeather />
         <ExtendedWeather />
       </div>
       <div class="row">
@@ -37,31 +37,6 @@ export default {
     ForecastWeather,
     Footer,
     Location
-  },
-  data() {
-    return {
-      temperature: 25,
-      weatherInfo: "empty"
-    };
-  },
-  mounted: function() {
-    fetch(
-      `${process.env.VUE_APP_URL}/weather?q=London&appid=${process.env.VUE_APP_API_KEY}`,
-      {
-        method: "get"
-      }
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(jsonObj => {
-        console.log(process.env.VUE_APP_URL);
-        this.weatherInfo = jsonObj.weather[0].description;
-        this.temperature =
-          Math.round(
-            (parseFloat(jsonObj.main.temp) - 272.1 + Number.EPSILON) * 100
-          ) / 100;
-      });
   }
 };
 </script>
