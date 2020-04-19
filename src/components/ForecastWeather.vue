@@ -8,13 +8,18 @@
           <div class="weather-icon" v-if="weather.icon">
             <font-awesome-icon :icon="weather.icon" size="4x" />
           </div>
-          <p>Temperature: {{ weather.temperature }} °C</p>
-          <div>
-            <p>
-              <font-awesome-icon class="wind-icon" icon="wind" size="lg" />
-              <span>{{weather.wind.direction}}</span>
-            </p>
-            <p class="wind-speed">{{ weather.wind.speed }} m/s</p>
+          <div class="row weather-parameters">
+            <div class="temperature-container">
+              <font-awesome-icon icon="temperature-high" size="lg" />
+              <p>{{ weather.temperature }} °C</p>
+            </div>
+            <div class="wind-container">
+              <p class="wind-icon-paragraph">
+                <font-awesome-icon icon="wind" size="lg" />
+                {{weather.wind.direction}}
+              </p>
+              <p>{{ weather.wind.speed }} m/s</p>
+            </div>
           </div>
         </div>
       </div>
@@ -73,7 +78,7 @@ export default {
           if (x.dt_txt.indexOf("12:00:00") !== -1) {
             let weather = {
               id: index,
-              date: x.dt_txt.substring(0, x.dt_txt.indexOf("12:00:00")-1),
+              date: x.dt_txt.substring(0, x.dt_txt.indexOf("12:00:00") - 1),
               icon: this.getWeatherIcon(
                 x.weather[0].main,
                 x.weather[0].description
@@ -107,8 +112,17 @@ export default {
   vertical-align: top;
 }
 
-.wind-icon,
-.wind-speed{
-  margin: 0 10px;
+.weather-parameters {
+  width: 100%;
+  margin: 10% 0 0 12%;
+}
+
+.temperature-container {
+  display: inline-block;
+  width: 45%;
+}
+
+.wind-icon-paragraph {
+  margin: 0;
 }
 </style>
