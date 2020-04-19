@@ -14,10 +14,11 @@
 <script>
 import axios from 'axios'
 import { conversion } from './helpers/ConversionHelper'
+import { url } from "./helpers/UrlHelper";
 
 export default {
     name: 'ExtendedWeather',
-    mixins: [conversion],
+    mixins: [conversion, url],
     data() {
         return {
             feelsLike: 0,
@@ -27,27 +28,12 @@ export default {
             rain: 0,
             errored: null,
             loading: null,
-            city: '',
-            latitude: 0,
-            longitude: 0,
-            url: null
+            apiUrl: this.getApiUrl('weather')
         }
-    },
-    created () {
-      this.city = JSON.parse(window.localStorage.getItem('city'));
-      this.latitude = JSON.parse(window.localStorage.getItem('latitude'));
-      this.longitude = JSON.parse(window.localStorage.getItem('longitude'));
-      if(this.city) {
-        this.url = `${process.env.VUE_APP_URL}/weather?q=${this.city}&appid=${process.env.VUE_APP_API_KEY}`;
-      } else if (this.latitude && this.longitude) {
-        this.url = `${process.env.VUE_APP_URL}/weather?lat=${this.latitude}&lon=${this.longitude}&appid=${process.env.VUE_APP_API_KEY}`;
-      } else {
-        this.url = `${process.env.VUE_APP_URL}/weather?q=London&appid=${process.env.VUE_APP_API_KEY}`;
-      }
     },
     mounted () {
         axios
-          .get(this.url)
+          .get(this.apiUrl)
           .then(response => {
             this.feelsLike =  this.convertToCelsius(response['data']['main']['feels_like']),
             this.clouds = response['data']['clouds']['all'],

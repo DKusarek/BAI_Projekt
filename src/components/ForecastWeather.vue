@@ -31,10 +31,11 @@
 import axios from "axios";
 import { icons } from "./helpers/IconHelper";
 import { conversion } from "./helpers/ConversionHelper";
+import { url } from "./helpers/UrlHelper";
 
 export default {
   name: "forecast-weather",
-  mixins: [icons, conversion],
+  mixins: [icons, conversion, url],
   data() {
     return {
       forecast: [
@@ -51,27 +52,12 @@ export default {
       ],
       errored: null,
       loading: true,
-      city: "",
-      latitude: 0,
-      longitude: 0,
-      url: null
+      apiUrl: this.getApiUrl('forecast')
     };
-  },
-  created() {
-    this.city = JSON.parse(window.localStorage.getItem("city"));
-    this.latitude = JSON.parse(window.localStorage.getItem("latitude"));
-    this.longitude = JSON.parse(window.localStorage.getItem("longitude"));
-    if (this.city) {
-      this.url = `${process.env.VUE_APP_URL}/forecast?q=${this.city}&appid=${process.env.VUE_APP_API_KEY}`;
-    } else if (this.latitude && this.longitude) {
-      this.url = `${process.env.VUE_APP_URL}/forecast?lat=${this.latitude}&lon=${this.longitude}&appid=${process.env.VUE_APP_API_KEY}`;
-    } else {
-      this.url = `${process.env.VUE_APP_URL}/forecast?q=London&appid=${process.env.VUE_APP_API_KEY}`;
-    }
   },
   mounted: function() {
     axios
-      .get(this.url)
+      .get(this.apiUrl)
       .then(response => {
         let forecast = [];
         response.data.list.forEach((x, index) => {
