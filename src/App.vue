@@ -2,12 +2,11 @@
   <div id="app">
     <Header />
     <div class="container" style="margin-top:20px">
-      <div class="row"></div>
-      <div class="row">
-        <div class="col-sm-3" style="border:1px solid black;">
+       <div class="row top-row">
+        <div class="col-sm-3">
           <CurrentWeather />
         </div>
-        <div class="col-sm-6" style="border:1px solid black;">
+        <div class="col-sm-6">
           <TemperatureChart />
         </div>
         <div class="col-sm-3">
@@ -17,7 +16,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12" style="border:1px solid black;">
+        <div class="col-sm-12">
           <ForecastWeather />
         </div>
       </div>
@@ -67,5 +66,9 @@ button {
 .weather-icon {
   color: #5b8fc7;
   text-align: center;
+}
+
+.top-row{
+  margin-bottom: 3%;
 }
 </style>

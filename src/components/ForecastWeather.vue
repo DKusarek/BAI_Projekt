@@ -94,7 +94,6 @@ export default {
 .day-forecast {
   display: inline-block;
   width: 20%;
-  border: 1px solid black;
   vertical-align: top;
 }
 

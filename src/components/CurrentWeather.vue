@@ -2,6 +2,7 @@
   <div>
     <div v-if="!loading">
       <h2>Today</h2>
+      <br />
       <div class="weather-icon" v-if="weather.icon">
         <font-awesome-icon :icon="weather.icon" size="6x" />
       </div>
