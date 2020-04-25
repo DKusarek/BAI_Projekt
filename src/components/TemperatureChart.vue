@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h5>Daily temperature</h5>
     <canvas ref="myChart" :width="200" :height="100"></canvas>
   </div>
 </template>
@@ -46,10 +47,6 @@ export default {
               }
             }
           ]
-        },
-         title: {
-            display: true,
-            text: 'Custom Chart Title'
         }
       }
     });
