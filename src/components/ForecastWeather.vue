@@ -1,5 +1,5 @@
 <template>
-  <div class="col-sm-12" style="border:1px solid black;" v-if="!loading">
+  <div v-if="!loading">
     <h2>Forecast Wether</h2>
     <div class="day-forecast" v-for="weather in forecast" :key="weather.id">
       <div class="row">

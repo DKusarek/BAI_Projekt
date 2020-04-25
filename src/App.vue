@@ -1,17 +1,26 @@
 <template>
   <div id="app">
     <Header />
-    <NavBar />
     <div class="container" style="margin-top:20px">
       <div class="row">
-        <Location />
+        
       </div>
       <div class="row">
-        <CurrentWeather />
-        <ExtendedWeather />
+        <div class="col-sm-3" style="border:1px solid black;">
+          <CurrentWeather />
+        </div>
+        <div class="col-sm-6" style="border:1px solid black;">
+          <TemperatureChart />
+        </div>
+        <div class="col-sm-3" style="border:1px solid black;">
+          <Location />
+          <ExtendedWeather />
+        </div>
       </div>
       <div class="row">
-        <ForecastWeather />
+        <div class="col-sm-12" style="border:1px solid black;">
+          <ForecastWeather />
+        </div>
       </div>
     </div>
     <Footer />
@@ -20,23 +29,23 @@
 
 <script>
 import Header from "./components/Header.vue";
-import NavBar from "./components/NavBar.vue";
 import CurrentWeather from "./components/CurrentWeather.vue";
 import ExtendedWeather from "./components/ExtendedWeather.vue";
 import ForecastWeather from "./components/ForecastWeather.vue";
 import Footer from "./components/Footer.vue";
 import Location from "./components/Location.vue";
+import TemperatureChart from "./components/TemperatureChart";
 
 export default {
   name: "app",
   components: {
     Header,
-    NavBar,
     CurrentWeather,
     ExtendedWeather,
     ForecastWeather,
     Footer,
-    Location
+    Location,
+    TemperatureChart
   }
 };
 </script>
@@ -51,9 +60,8 @@ body {
   margin-bottom: 60px;
 }
 
-.weather-icon{
+.weather-icon {
   color: #5b8fc7;
   text-align: center;
 }
-
 </style>
