@@ -4,10 +4,6 @@
         <p class="text-muted">2020 My Weather</p>
       </div>
     </footer>
-<!--     
-    <div class="jumbotron text-center" style="margin-bottom:0">
-      <p>Footer TODO</p>
-    </div> -->
 </template>
 
 <style scoped>
@@ -15,12 +11,13 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60px; /* Set the fixed height of the footer here */
-  background-color: #f5f5f5;
+  height: 60px; 
+  background-color: #41608c;
 }
 
 .container .text-muted {
   margin: 20px 0;
+  color: white !important;
 }
 
 .footer > .container {

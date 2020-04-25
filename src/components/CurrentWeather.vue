@@ -3,15 +3,17 @@
     <div v-if="!loading">
       <h3>Today</h3>
       <br />
-      <div class="weather-icon" v-if="weather.icon">
-        <font-awesome-icon :icon="weather.icon" size="6x" />
+      <div class="row center-items main-weather-container" v-if="weather.icon">
+        <div class="col-sm-12 weather-icon">
+          <font-awesome-icon :icon="weather.icon" size="6x" />
+        </div>
       </div>
-      <div class="row weather-parameters">
-        <div class="temperature-container">
+      <div class="row center-items">
+        <div class="col-sm-6">
           <font-awesome-icon icon="temperature-high" size="lg" />
           <p>{{ weather.temperature }} °C</p>
         </div>
-        <div class="wind-container">
+        <div class="col-sm-6">
           <p class="wind-icon-paragraph">
             <font-awesome-icon icon="wind" size="lg" />
             {{weather.wind.direction}}
@@ -76,23 +78,12 @@ export default {
 
 
 <style scoped>
-.day-forecast {
-  display: inline-block;
-  width: 20%;
-  border: 1px solid black;
-  vertical-align: top;
+.main-weather-container {
+  margin-bottom: 10%;
 }
-
-.weather-parameters {
-  width: 100%;
-  margin: 10% 0 0 12%;
+.center-items {
+  text-align: center;
 }
-
-.temperature-container {
-  display: inline-block;
-  width: 45%;
-}
-
 .wind-icon-paragraph {
   margin: 0;
 }

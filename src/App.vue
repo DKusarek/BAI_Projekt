@@ -64,7 +64,7 @@ button {
 }
 
 .weather-icon {
-  color: #5b8fc7;
+  color: #739fde;
   text-align: center;
 }
 

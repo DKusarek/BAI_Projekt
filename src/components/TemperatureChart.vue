@@ -30,7 +30,7 @@ export default {
         datasets: [
           {
             label: "Temperature",
-            borderColor: "rgba(50, 115, 220, 0.5)",
+            borderColor: "#739fde",
             backgroundColor: "rgba(50, 115, 220, 0.1)",
             data: this.chartData
           }
