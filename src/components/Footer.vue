@@ -1,9 +1,9 @@
 <template>
-<footer class="footer">
-      <div class="container">
-        <p class="text-muted">2020 My Weather</p>
-      </div>
-    </footer>
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted">2020 My Weather</p>
+    </div>
+  </footer>
 </template>
 
 <style scoped>
@@ -11,7 +11,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 60px; 
+  height: 60px;
   background-color: #41608c;
 }
 
@@ -24,5 +24,4 @@
   padding-right: 15px;
   padding-left: 15px;
 }
-
 </style>

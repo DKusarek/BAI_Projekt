@@ -26,6 +26,10 @@
         </div>
       </div>
     </div>
+    <div v-if="errorStr">
+      Sorry, but the following error
+      occurred: {{errorStr}}
+    </div>
   </div>
 </template>
 
@@ -52,7 +56,7 @@ export default {
           }
         }
       ],
-      errored: null,
+      errorStr: null,
       loading: true,
       apiUrl: this.getApiUrl("forecast")
     };
@@ -85,7 +89,7 @@ export default {
       })
       .catch(error => {
         console.log(error);
-        this.errored = true;
+        this.errorStr = true;
       })
       .finally(() => (this.loading = false));
   }
@@ -116,8 +120,7 @@ export default {
     vertical-align: top;
   }
 }
-
-.forecast-container{
+.forecast-container {
   text-align: center;
 }
 </style>

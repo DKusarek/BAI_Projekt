@@ -48,23 +48,21 @@ export default {
           ]
         },
         legend: {
-            display: false
+          display: false
         },
         tooltips: {
-            callbacks: {
-            label: (item) => `Temperature: ${item.yLabel} °C`,
-            },
-        },
+          callbacks: {
+            label: item => `Temperature: ${item.yLabel} °C`
+          }
+        }
       }
     });
-
-    //data for chart
     axios
       .get(this.forecastWeatherUrl)
       .then(response => {
         const unixOneDay = 86400;
         let currentTime = response.data.list[0].dt;
-        response.data.list.forEach((x /*, index*/) => {
+        response.data.list.forEach((x) => {
           if (x.dt - currentTime < unixOneDay) {
             let hoursBegin = x.dt_txt.indexOf("00:00:00");
             if (hoursBegin === -1) {

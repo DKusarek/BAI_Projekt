@@ -21,6 +21,10 @@
           <p>{{ weather.wind.speed }} m/s</p>
         </div>
       </div>
+      <div v-if="errorStr">
+        Sorry, but the following error
+        occurred: {{errorStr}}
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +50,7 @@ export default {
           }
         }
       ],
-      errored: null,
+      errorStr: null,
       loading: true,
       currentWeatherUrl: this.getApiUrl("weather")
     };
@@ -69,14 +73,9 @@ export default {
       })
       .catch(error => {
         console.log(error);
-        this.errored = true;
+        this.errorStr = true;
       })
       .finally(() => (this.loading = false));
   }
 };
 </script>
-
-
-<style scoped>
-
-</style>

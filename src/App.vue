@@ -58,15 +58,12 @@ body {
   margin-bottom: 60px;
   color: #000000ad;
 }
-
 button {
   color: #000000ad;
 }
-
 .top-row {
   margin-bottom: 3%;
 }
-
 .main-weather-container {
   margin-bottom: 10%;
 }
@@ -76,7 +73,6 @@ button {
 .wind-icon-paragraph {
   margin: 0;
 }
-
 @media screen and (max-width: 299px) {
   .small-icon {
     font-size: 1em;
@@ -87,7 +83,7 @@ button {
   .large-icon {
     font-size: 4em;
   }
-  h1{
+  h1 {
     font-size: 1.5em;
   }
   .component-container {
@@ -97,7 +93,6 @@ button {
     margin-top: 15%;
   }
 }
-
 @media screen and (min-width: 300px) and (max-width: 539px) {
   .component-container {
     margin-bottom: 5%;
@@ -106,7 +101,6 @@ button {
     margin-top: 5%;
   }
 }
-
 @media screen and (min-width: 300px) {
   .small-icon {
     font-size: 1.33em;
@@ -118,7 +112,6 @@ button {
     font-size: 6em;
   }
 }
-
 .weather-icon {
   color: #739fde;
   text-align: center;
