@@ -2,21 +2,21 @@
   <div id="app">
     <Header />
     <div class="container" style="margin-top:20px">
-       <div class="row top-row">
-        <div class="col-sm-3">
+      <div class="row top-row">
+        <div class="col-md-3 col-sm-6">
           <CurrentWeather />
         </div>
-        <div class="col-sm-6">
+        <div class="col-md-6 col-sm-12 order-md-1 order-sm-2">
           <TemperatureChart />
         </div>
-        <div class="col-sm-3">
+        <div class="col-md-3 col-sm-6 order-md-2 order-sm-1">
           <Location />
           <br />
           <ExtendedWeather />
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12">
+        <div class="col">
           <ForecastWeather />
         </div>
       </div>
@@ -63,12 +63,64 @@ button {
   color: #000000ad;
 }
 
+.top-row {
+  margin-bottom: 3%;
+}
+
+.main-weather-container {
+  margin-bottom: 10%;
+}
+.center-items {
+  text-align: center;
+}
+.wind-icon-paragraph {
+  margin: 0;
+}
+
+@media screen and (max-width: 299px) {
+  .small-icon {
+    font-size: 1em;
+  }
+  .medium-icon {
+    font-size: 3em;
+  }
+  .large-icon {
+    font-size: 4em;
+  }
+  h1{
+    font-size: 1.5em;
+  }
+  .component-container {
+    margin-bottom: 15%;
+  }
+  .location-container {
+    margin-top: 15%;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 539px) {
+  .component-container {
+    margin-bottom: 5%;
+  }
+  .location-container {
+    margin-top: 5%;
+  }
+}
+
+@media screen and (min-width: 300px) {
+  .small-icon {
+    font-size: 1.33em;
+  }
+  .medium-icon {
+    font-size: 4em;
+  }
+  .large-icon {
+    font-size: 6em;
+  }
+}
+
 .weather-icon {
   color: #739fde;
   text-align: center;
-}
-
-.top-row{
-  margin-bottom: 3%;
 }
 </style>

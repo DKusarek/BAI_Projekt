@@ -1,21 +1,21 @@
 <template>
   <div>
-    <div v-if="!loading">
+    <div class="component-container" v-if="!loading">
       <h3>Today</h3>
       <br />
       <div class="row center-items main-weather-container" v-if="weather.icon">
-        <div class="col-sm-12 weather-icon">
-          <font-awesome-icon :icon="weather.icon" size="6x" />
+        <div class="col weather-icon">
+          <font-awesome-icon :icon="weather.icon" class="large-icon" />
         </div>
       </div>
       <div class="row center-items">
-        <div class="col-sm-6">
-          <font-awesome-icon icon="temperature-high" size="lg" />
+        <div class="col-6">
+          <font-awesome-icon icon="temperature-high" title="Temperature" class="small-icon" />
           <p>{{ weather.temperature }} °C</p>
         </div>
-        <div class="col-sm-6">
+        <div class="col-6">
           <p class="wind-icon-paragraph">
-            <font-awesome-icon icon="wind" size="lg" />
+            <font-awesome-icon icon="wind" title="Wind" class="small-icon" />
             {{weather.wind.direction}}
           </p>
           <p>{{ weather.wind.speed }} m/s</p>
@@ -78,13 +78,5 @@ export default {
 
 
 <style scoped>
-.main-weather-container {
-  margin-bottom: 10%;
-}
-.center-items {
-  text-align: center;
-}
-.wind-icon-paragraph {
-  margin: 0;
-}
+
 </style>

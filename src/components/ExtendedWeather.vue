@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="component-container">
     <h5>Extended Weather</h5>
     <span>Feels like: {{feelsLike}} °C</span>
     <br />

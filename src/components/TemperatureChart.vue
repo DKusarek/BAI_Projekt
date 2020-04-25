@@ -29,7 +29,6 @@ export default {
         labels: this.chartLabels,
         datasets: [
           {
-            label: "Temperature",
             borderColor: "#739fde",
             backgroundColor: "rgba(50, 115, 220, 0.1)",
             data: this.chartData
@@ -47,7 +46,15 @@ export default {
               }
             }
           ]
-        }
+        },
+        legend: {
+            display: false
+        },
+        tooltips: {
+            callbacks: {
+            label: (item) => `Temperature: ${item.yLabel} °C`,
+            },
+        },
       }
     });
 
