@@ -1,14 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-sm-11">
-        <form v-on:submit="saveCity">
-          <input type="text" v-model="city" placeholder="Custom" />
-          <button type="submit">Save</button>
-        </form>
-      </div>
-      <div class="col-sm-1">
-        <button @click="currentLocation" title="Current location" class="current-location">
+      <div class="col-sm-12">
+        <input type="text" v-model="city" placeholder="Custom" />
+        <button type="button" @click="saveCity" title="Save location">
+          <font-awesome-icon icon="save" />
+        </button>
+        <button type="button" @click="currentLocation" title="Current location">
           <font-awesome-icon icon="thumbtack" />
         </button>
       </div>
@@ -75,7 +73,4 @@ export default {
 };
 </script>
 <style>
-.current-location {
-  color: #000000ad;
-}
 </style>

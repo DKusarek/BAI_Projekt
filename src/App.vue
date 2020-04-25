@@ -58,6 +58,11 @@ html {
 }
 body {
   margin-bottom: 60px;
+  color: #000000ad;
+}
+
+button{
+   color: #000000ad;
 }
 
 .weather-icon {
