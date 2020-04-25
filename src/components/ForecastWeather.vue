@@ -1,6 +1,6 @@
 <template>
-  <div class="col-sm-12" style="border:1px solid black;" v-if="!loading">
-    <h2>Forecast Wether</h2>
+  <div v-if="!loading">
+    <h5>Forecast Wether</h5>
     <div class="day-forecast" v-for="weather in forecast" :key="weather.id">
       <div class="row">
         <div class="col-sm-12">
@@ -94,7 +94,6 @@ export default {
 .day-forecast {
   display: inline-block;
   width: 20%;
-  border: 1px solid black;
   vertical-align: top;
 }
 

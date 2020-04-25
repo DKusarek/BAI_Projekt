@@ -1,13 +1,26 @@
 <template>
-    <div class="col-sm-6" style="border:1px solid black;">
-      <h2>Weather for today</h2>
-      <h6>{{weather.description}}</h6>
+  <div>
+    <div v-if="!loading">
+      <h3>Today</h3>
+      <br />
       <div class="weather-icon" v-if="weather.icon">
-        <font-awesome-icon :icon="weather.icon" size="4x" />
+        <font-awesome-icon :icon="weather.icon" size="6x" />
       </div>
-      <h6>Temperature: {{ weather.temperature }}</h6>
-      <canvas ref="myChart" :width="200" :height="100"></canvas>
+      <div class="row weather-parameters">
+        <div class="temperature-container">
+          <font-awesome-icon icon="temperature-high" size="lg" />
+          <p>{{ weather.temperature }} °C</p>
+        </div>
+        <div class="wind-container">
+          <p class="wind-icon-paragraph">
+            <font-awesome-icon icon="wind" size="lg" />
+            {{weather.wind.direction}}
+          </p>
+          <p>{{ weather.wind.speed }} m/s</p>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -15,18 +28,16 @@ import axios from "axios";
 import { icons } from "./helpers/IconHelper";
 import { conversion } from "./helpers/ConversionHelper";
 import { url } from "./helpers/UrlHelper";
-import Chart from 'chart.js';
 
 export default {
   name: "current-weather",
   mixins: [icons, conversion, url],
   data() {
-   return {
+    return {
       weather: [
         {
           icon: "",
           temperature: 0,
-          description: "",
           wind: {
             speed: "",
             direction: ""
@@ -35,70 +46,24 @@ export default {
       ],
       errored: null,
       loading: true,
-      currentWeatherUrl: this.getApiUrl('weather'),
-      forecastWeatherUrl: this.getApiUrl('forecast'),
-      //chart variables
-      chart: null,
-      chartLabels: [],
-      chartData: []
+      currentWeatherUrl: this.getApiUrl("weather")
     };
   },
   mounted: function() {
-    this.chart = new Chart(this.$refs.myChart, {
-      type: 'line',
-      data: {
-        labels: this.chartLabels,
-        datasets: [{
-          label: 'Temperature',
-          borderColor: 'rgba(50, 115, 220, 0.5)',
-          backgroundColor: 'rgba(50, 115, 220, 0.1)',
-          data: this.chartData
-        }]
-      },
-      options: {responsive: true}
-    });
     axios
       .get(this.currentWeatherUrl)
       .then(response => {
-            this.weather = {
-              description: response.data.weather[0].description,
-              icon: this.getWeatherIcon(
-                response.data.weather[0].main,
-                response.data.weather[0].description
-              ),
-              temperature: response.data.main.temp,
-              wind: {
-                speed: response.data.wind.speed,
-                direction: this.getWindDirection(response.data.wind.deg)
-              }
-            };
-           
-        })
-        .catch(error => {
-          console.log(error);
-          this.errored = true;
-        })
-        .finally(() => (this.loading = false));
-
-    //data for chart
-    axios
-      .get(this.forecastWeatherUrl)
-      .then(response => {
-        const unixOneDay = 86400;
-        let currentTime = response.data.list[0].dt;
-        response.data.list.forEach((x/*, index*/) => {
-          if (x.dt - currentTime < unixOneDay) {
-            let hoursBegin = x.dt_txt.indexOf("00:00:00");
-            if( hoursBegin === -1)
-            {
-              hoursBegin = x.dt_txt.indexOf("00:00") - 3;
-            }
-            let onlyHour = x.dt_txt.substring(hoursBegin, hoursBegin+5);
-            this.chartLabels.push(onlyHour);
-            this.chartData.push(this.convertToCelsius(x.main.temp));
+        this.weather = {
+          icon: this.getWeatherIcon(
+            response.data.weather[0].main,
+            response.data.weather[0].description
+          ),
+          temperature: this.convertToCelsius(response.data.main.temp),
+          wind: {
+            speed: response.data.wind.speed,
+            direction: this.getWindDirection(response.data.wind.deg)
           }
-        });
-        this.chart.update();
+        };
       })
       .catch(error => {
         console.log(error);
@@ -109,3 +74,26 @@ export default {
 };
 </script>
 
+
+<style scoped>
+.day-forecast {
+  display: inline-block;
+  width: 20%;
+  border: 1px solid black;
+  vertical-align: top;
+}
+
+.weather-parameters {
+  width: 100%;
+  margin: 10% 0 0 12%;
+}
+
+.temperature-container {
+  display: inline-block;
+  width: 45%;
+}
+
+.wind-icon-paragraph {
+  margin: 0;
+}
+</style>
