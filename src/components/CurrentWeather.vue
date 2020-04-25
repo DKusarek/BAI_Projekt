@@ -1,20 +1,22 @@
 <template>
   <div>
-    <h2>Today</h2>
-    <div class="weather-icon" v-if="weather.icon">
-      <font-awesome-icon :icon="weather.icon" size="6x" />
-    </div>
-    <div class="row weather-parameters">
-      <div class="temperature-container">
-        <font-awesome-icon icon="temperature-high" size="lg" />
-        <p>{{ weather.temperature }} °C</p>
+    <div v-if="!loading">
+      <h2>Today</h2>
+      <div class="weather-icon" v-if="weather.icon">
+        <font-awesome-icon :icon="weather.icon" size="6x" />
       </div>
-      <div class="wind-container">
-        <p class="wind-icon-paragraph">
-          <font-awesome-icon icon="wind" size="lg" />
-          {{weather.wind.direction}}
-        </p>
-        <p>{{ weather.wind.speed }} m/s</p>
+      <div class="row weather-parameters">
+        <div class="temperature-container">
+          <font-awesome-icon icon="temperature-high" size="lg" />
+          <p>{{ weather.temperature }} °C</p>
+        </div>
+        <div class="wind-container">
+          <p class="wind-icon-paragraph">
+            <font-awesome-icon icon="wind" size="lg" />
+            {{weather.wind.direction}}
+          </p>
+          <p>{{ weather.wind.speed }} m/s</p>
+        </div>
       </div>
     </div>
   </div>
