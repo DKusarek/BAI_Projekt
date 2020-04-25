@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h5>Location</h5>
     <div class="row">
       <div class="col-sm-12">
         <input type="text" v-model="city" placeholder="Custom" />
@@ -53,6 +54,7 @@ export default {
   methods: {
     saveCity() {
       localStorage.setItem("city", JSON.stringify(this.city));
+      location.reload();
     },
     saveGeolocation() {
       localStorage.setItem(

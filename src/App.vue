@@ -2,9 +2,7 @@
   <div id="app">
     <Header />
     <div class="container" style="margin-top:20px">
-      <div class="row">
-        
-      </div>
+      <div class="row"></div>
       <div class="row">
         <div class="col-sm-3" style="border:1px solid black;">
           <CurrentWeather />
@@ -12,8 +10,9 @@
         <div class="col-sm-6" style="border:1px solid black;">
           <TemperatureChart />
         </div>
-        <div class="col-sm-3" style="border:1px solid black;">
+        <div class="col-sm-3">
           <Location />
+          <br />
           <ExtendedWeather />
         </div>
       </div>
@@ -61,8 +60,8 @@ body {
   color: #000000ad;
 }
 
-button{
-   color: #000000ad;
+button {
+  color: #000000ad;
 }
 
 .weather-icon {
