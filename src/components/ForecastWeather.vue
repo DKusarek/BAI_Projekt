@@ -1,21 +1,23 @@
 <template>
-  <div v-if="!loading">
+  <div class="component-container forecast-container" v-if="!loading">
     <h5>Forecast Wether</h5>
     <div class="day-forecast" v-for="weather in forecast" :key="weather.id">
       <div class="row">
-        <div class="col-sm-12">
-          <p>Date: {{ weather.date }}</p>
-          <div class="weather-icon" v-if="weather.icon">
-            <font-awesome-icon :icon="weather.icon" size="4x" />
+        <div class="col center-items">
+          <p>{{ weather.date }}</p>
+          <div class="row center-items main-weather-container" v-if="weather.icon">
+            <div class="col weather-icon">
+              <font-awesome-icon :icon="weather.icon" class="medium-icon" />
+            </div>
           </div>
-          <div class="row weather-parameters">
-            <div class="temperature-container">
-              <font-awesome-icon icon="temperature-high" size="lg" />
+          <div class="row center-items">
+            <div class="col-6">
+              <font-awesome-icon icon="temperature-high" title="Temperature" class="small-icon" />
               <p>{{ weather.temperature }} °C</p>
             </div>
-            <div class="wind-container">
+            <div class="col-6">
               <p class="wind-icon-paragraph">
-                <font-awesome-icon icon="wind" size="lg" />
+                <font-awesome-icon icon="wind" title="Wind" class="small-icon" />
                 {{weather.wind.direction}}
               </p>
               <p>{{ weather.wind.speed }} m/s</p>
@@ -23,6 +25,10 @@
           </div>
         </div>
       </div>
+    </div>
+    <div v-if="errorStr">
+      Sorry, but the following error
+      occurred: {{errorStr}}
     </div>
   </div>
 </template>
@@ -50,9 +56,9 @@ export default {
           }
         }
       ],
-      errored: null,
+      errorStr: null,
       loading: true,
-      apiUrl: this.getApiUrl('forecast')
+      apiUrl: this.getApiUrl("forecast")
     };
   },
   mounted: function() {
@@ -83,7 +89,7 @@ export default {
       })
       .catch(error => {
         console.log(error);
-        this.errored = true;
+        this.errorStr = true;
       })
       .finally(() => (this.loading = false));
   }
@@ -91,23 +97,30 @@ export default {
 </script>
 
 <style scoped>
-.day-forecast {
-  display: inline-block;
-  width: 20%;
-  vertical-align: top;
+@media screen and (max-width: 299px) {
+  .day-forecast {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    border-bottom: 3px solid #8080802e;
+  }
 }
-
-.weather-parameters {
-  width: 100%;
-  margin: 10% 0 0 12%;
+@media screen and (min-width: 300px) and (max-width: 799px) {
+  .day-forecast {
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    border-bottom: 3px solid #8080802e;
+  }
 }
-
-.temperature-container {
-  display: inline-block;
-  width: 45%;
+@media screen and (min-width: 800px) {
+  .day-forecast {
+    display: inline-block;
+    width: 20%;
+    vertical-align: top;
+  }
 }
-
-.wind-icon-paragraph {
-  margin: 0;
+.forecast-container {
+  text-align: center;
 }
 </style>

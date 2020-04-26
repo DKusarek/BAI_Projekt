@@ -1,9 +1,13 @@
 <template>
-  <div>
+  <div class="component-container location-container">
     <h5>Location</h5>
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col">
         <input type="text" v-model="city" placeholder="Custom" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
         <button type="button" @click="saveCity" title="Save location">
           <font-awesome-icon icon="save" />
         </button>
@@ -75,4 +79,7 @@ export default {
 };
 </script>
 <style>
+button {
+  display: inline-block;
+}
 </style>

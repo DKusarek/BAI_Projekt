@@ -1,23 +1,29 @@
 <template>
   <div>
-    <div v-if="!loading">
+    <div class="component-container" v-if="!loading">
       <h3>Today</h3>
       <br />
-      <div class="weather-icon" v-if="weather.icon">
-        <font-awesome-icon :icon="weather.icon" size="6x" />
+      <div class="row center-items main-weather-container" v-if="weather.icon">
+        <div class="col weather-icon">
+          <font-awesome-icon :icon="weather.icon" class="large-icon" />
+        </div>
       </div>
-      <div class="row weather-parameters">
-        <div class="temperature-container">
-          <font-awesome-icon icon="temperature-high" size="lg" />
+      <div class="row center-items">
+        <div class="col-6">
+          <font-awesome-icon icon="temperature-high" title="Temperature" class="small-icon" />
           <p>{{ weather.temperature }} °C</p>
         </div>
-        <div class="wind-container">
+        <div class="col-6">
           <p class="wind-icon-paragraph">
-            <font-awesome-icon icon="wind" size="lg" />
+            <font-awesome-icon icon="wind" title="Wind" class="small-icon" />
             {{weather.wind.direction}}
           </p>
           <p>{{ weather.wind.speed }} m/s</p>
         </div>
+      </div>
+      <div v-if="errorStr">
+        Sorry, but the following error
+        occurred: {{errorStr}}
       </div>
     </div>
   </div>
@@ -44,7 +50,7 @@ export default {
           }
         }
       ],
-      errored: null,
+      errorStr: null,
       loading: true,
       currentWeatherUrl: this.getApiUrl("weather")
     };
@@ -67,33 +73,9 @@ export default {
       })
       .catch(error => {
         console.log(error);
-        this.errored = true;
+        this.errorStr = true;
       })
       .finally(() => (this.loading = false));
   }
 };
 </script>
-
-
-<style scoped>
-.day-forecast {
-  display: inline-block;
-  width: 20%;
-  border: 1px solid black;
-  vertical-align: top;
-}
-
-.weather-parameters {
-  width: 100%;
-  margin: 10% 0 0 12%;
-}
-
-.temperature-container {
-  display: inline-block;
-  width: 45%;
-}
-
-.wind-icon-paragraph {
-  margin: 0;
-}
-</style>
