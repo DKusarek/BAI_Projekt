@@ -41,7 +41,7 @@ export default {
   },
   beforeMount() {
     axios
-      .get(`${process.env.VUE_APP_URL_TO_GET_IP}`)
+      .get(`${process.env.VUE_APP_CORS_API}${process.env.VUE_APP_URL_TO_GET_IP}`)
       .then(response => (localStorage.setItem("ip", JSON.stringify(response.data.ip))))
       .catch(error => {
         console.log(error);
@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`${process.env.VUE_APP_URL_TO_GET_GEOLOCATION}&ip=${this.ip}`)
+      .get(`${process.env.VUE_APP_CORS_API}${process.env.VUE_APP_URL_TO_GET_GEOLOCATION}&ip=${this.ip}`)
       .then(response => {
         this.saveGeolocation(response.data.latitude, response.data.longitude)
       })
