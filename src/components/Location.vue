@@ -16,58 +16,64 @@
         </button>
       </div>
     </div>
-    <div v-if="errorStr">
-      Sorry, but the following error
-      occurred: {{errorStr}}
+    <div v-if="errored">
+      Sorry, something went wrong
     </div>
-    <div v-if="gettingLocation">
+    <div v-if="loading">
       <i>Getting your location...</i>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Location",
   data() {
     return {
       city: JSON.parse(window.localStorage.getItem("city")),
       location: null,
-      gettingLocation: false,
-      errorStr: null
+      loading: true,
+      errored: false,
+      ip: JSON.parse(window.localStorage.getItem("ip"))
     };
   },
-  created() {
-    if (!("geolocation" in navigator)) {
-      this.errorStr = "Geolocation is not available.";
-      return;
-    }
-    this.gettingLocation = true;
-    navigator.geolocation.getCurrentPosition(
-      pos => {
-        this.gettingLocation = false;
-        this.location = pos;
-        this.saveGeolocation();
-      },
-      err => {
-        this.gettingLocation = false;
-        this.errorStr = err.message;
-      }
-    );
+  beforeMount() {
+    axios
+      .get(`${process.env.VUE_APP_URL_TO_GET_IP}`)
+      .then(response => (localStorage.setItem("ip", JSON.stringify(response.data.ip))))
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      })
+      .finally(() => (this.loading = false));
+  },
+  mounted() {
+    axios
+      .get(`${process.env.VUE_APP_URL_TO_GET_GEOLOCATION}&ip=${this.ip}`)
+      .then(response => {
+        this.saveGeolocation(response.data.latitude, response.data.longitude)
+      })
+      .catch(error => {
+        console.log(error);
+        this.errored = true;
+      })
+      .finally(() => (this.loading = false));
   },
   methods: {
     saveCity() {
       localStorage.setItem("city", JSON.stringify(this.city));
       location.reload();
     },
-    saveGeolocation() {
+    saveGeolocation(latitude, longitude) {
       localStorage.setItem(
         "latitude",
-        JSON.stringify(Math.round(this.location.coords.latitude))
+        JSON.stringify(Math.round(latitude))
       );
       localStorage.setItem(
         "longitude",
-        JSON.stringify(Math.round(this.location.coords.longitude))
+        JSON.stringify(Math.round(longitude))
       );
     },
     currentLocation() {
