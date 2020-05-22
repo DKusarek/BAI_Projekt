@@ -38,10 +38,11 @@ import axios from "axios";
 import { icons } from "./helpers/IconHelper";
 import { conversion } from "./helpers/ConversionHelper";
 import { url } from "./helpers/UrlHelper";
+import { cityHelper } from "./helpers/CityHelper";
 
 export default {
   name: "forecast-weather",
-  mixins: [icons, conversion, url],
+  mixins: [icons, conversion, url, cityHelper],
   data() {
     return {
       forecast: [
@@ -58,12 +59,13 @@ export default {
       ],
       errorStr: null,
       loading: true,
-      apiUrl: this.getApiUrl("forecast")
+      city: null
     };
   },
-  mounted: function() {
-    axios
-      .get(this.apiUrl)
+  methods: {
+    sendRequest(){
+      axios
+      .get(this.getApiUrl("forecast"))
       .then(response => {
         let forecast = [];
         response.data.list.forEach((x, index) => {
@@ -92,6 +94,7 @@ export default {
         this.errorStr = true;
       })
       .finally(() => (this.loading = false));
+    }
   }
 };
 </script>

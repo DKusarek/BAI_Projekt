@@ -10,16 +10,17 @@ import axios from "axios";
 import { conversion } from "./helpers/ConversionHelper";
 import { url } from "./helpers/UrlHelper";
 import Chart from "chart.js";
+import { cityHelper } from "./helpers/CityHelper";
 
 export default {
   name: "temperature-chart",
-  mixins: [conversion, url],
+  mixins: [conversion, url, cityHelper],
   data() {
     return {
-      forecastWeatherUrl: this.getApiUrl("forecast"),
       chart: null,
       chartLabels: [],
-      chartData: []
+      chartData: [],
+      city: null
     };
   },
   mounted: function() {
@@ -57,11 +58,16 @@ export default {
         }
       }
     });
-    axios
-      .get(this.forecastWeatherUrl)
+  },
+  methods: {
+    sendRequest(){
+      axios
+      .get(this.getApiUrl("forecast"))
       .then(response => {
         const unixOneDay = 86400;
         let currentTime = response.data.list[0].dt;
+        this.chartLabels.length = 0;
+        this.chartData.length = 0;        
         response.data.list.forEach((x) => {
           if (x.dt - currentTime < unixOneDay) {
             let hoursBegin = x.dt_txt.indexOf("00:00:00");
@@ -80,6 +86,7 @@ export default {
         this.errored = true;
       })
       .finally(() => (this.loading = false));
+    },
   }
 };
 </script>
