@@ -64,7 +64,11 @@ export default {
   methods: {
     saveCity() {
       localStorage.setItem("city", JSON.stringify(this.city));
-      location.reload();
+      window.dispatchEvent(new CustomEvent('city-localstorage-changed', {
+        detail: {
+          storage: JSON.parse(window.localStorage.getItem('city'))
+        }
+      }));    
     },
     saveGeolocation(latitude, longitude) {
       localStorage.setItem(
@@ -79,7 +83,11 @@ export default {
     currentLocation() {
       localStorage.removeItem("city");
       this.city = "";
-      location.reload();
+      window.dispatchEvent(new CustomEvent('city-localstorage-changed', {
+        detail: {
+          storage: ''
+        }
+      }));   
     }
   }
 };

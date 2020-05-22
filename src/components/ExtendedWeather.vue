@@ -17,10 +17,11 @@
 import axios from "axios";
 import { conversion } from "./helpers/ConversionHelper";
 import { url } from "./helpers/UrlHelper";
+import { cityHelper } from "./helpers/CityHelper";
 
 export default {
   name: "ExtendedWeather",
-  mixins: [conversion, url],
+  mixins: [conversion, url, cityHelper],
   data() {
     return {
       feelsLike: 0,
@@ -30,12 +31,14 @@ export default {
       rain: 0,
       errored: null,
       loading: null,
-      apiUrl: this.getApiUrl("weather")
+      city: null
     };
   },
-  mounted() {
-    axios
-      .get(this.apiUrl)
+  
+  methods: {
+    sendRequest(){
+      axios
+      .get(this.getApiUrl("weather"))
       .then(response => {
         (this.feelsLike = this.convertToCelsius(
           response["data"]["main"]["feels_like"]
@@ -50,6 +53,7 @@ export default {
         this.errored = true;
       })
       .finally(() => (this.loading = false));
+    }
   }
 };
 </script>

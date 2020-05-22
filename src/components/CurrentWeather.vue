@@ -34,10 +34,11 @@ import axios from "axios";
 import { icons } from "./helpers/IconHelper";
 import { conversion } from "./helpers/ConversionHelper";
 import { url } from "./helpers/UrlHelper";
+import { cityHelper } from "./helpers/CityHelper";
 
 export default {
   name: "current-weather",
-  mixins: [icons, conversion, url],
+  mixins: [icons, conversion, url, cityHelper],
   data() {
     return {
       weather: [
@@ -52,12 +53,13 @@ export default {
       ],
       errorStr: null,
       loading: true,
-      currentWeatherUrl: this.getApiUrl("weather")
+      city: null
     };
   },
-  mounted: function() {
-    axios
-      .get(this.currentWeatherUrl)
+  methods: {
+    sendRequest(){
+      axios
+      .get(this.getApiUrl("weather"))
       .then(response => {
         this.weather = {
           icon: this.getWeatherIcon(
@@ -76,6 +78,7 @@ export default {
         this.errorStr = true;
       })
       .finally(() => (this.loading = false));
+    }
   }
 };
 </script>
