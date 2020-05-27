@@ -16,7 +16,7 @@
 }
 
 .container .text-muted {
-  margin: 20px 0;
+  margin-top: 20px;
   color: white !important;
 }
 

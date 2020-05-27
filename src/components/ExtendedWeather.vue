@@ -43,7 +43,7 @@ export default {
           (this.clouds = response["data"]["clouds"]["all"]),
           (this.pressure = response["data"]["main"]["pressure"]),
           (this.humidity = response["data"]["main"]["humidity"]),
-          (this.humidity = response["data"]["rain"]["3h"]);
+          (this.rain = response["data"]["rain"]["3h"]);
       })
       .catch(error => {
         console.log(error);

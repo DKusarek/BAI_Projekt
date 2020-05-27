@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" v-if="start">
     <Header />
     <div class="container" style="margin-top:20px">
       <div class="row top-row">
@@ -23,6 +23,9 @@
     </div>
     <Footer />
   </div>
+  <div id="app" v-else>
+    <video id="video" width="720" height="560" autoplay muted></video>
+  </div>
 </template>
 
 <script>
@@ -36,6 +39,11 @@ import TemperatureChart from "./components/TemperatureChart";
 
 export default {
   name: "app",
+  data() {
+    return {
+      start: localStorage.getItem('start')
+    }
+  },
   components: {
     Header,
     CurrentWeather,

@@ -15,6 +15,7 @@
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
+    "face-api.js": "^0.22.2",
     "vue": "^2.6.11"
   },
   "devDependencies": {

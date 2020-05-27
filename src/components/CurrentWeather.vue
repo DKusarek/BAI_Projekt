@@ -55,6 +55,9 @@ export default {
       currentWeatherUrl: this.getApiUrl("weather")
     };
   },
+  // beforeCreate: function() {
+    // document.body = "";
+  // },
   mounted: function() {
     axios
       .get(this.currentWeatherUrl)

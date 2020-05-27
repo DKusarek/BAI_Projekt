@@ -1,6 +1,6 @@
 <template>
   <div class="component-container forecast-container" v-if="!loading">
-    <h5>Forecast Wether</h5>
+    <h5 style="margin-top: 20px">Forecast Wether</h5>
     <div class="day-forecast" v-for="weather in forecast" :key="weather.id">
       <div class="row">
         <div class="col center-items">
